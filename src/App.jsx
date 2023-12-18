@@ -13,9 +13,9 @@ import NotFoundPage from "./pages/NotFoundPage.jsx";
 function App() {
   return (
     <div className="md:flex-row flex min-h-screen flex-col overflow-hidden bg-gradient-to-b from-purple-500 to-purple-900 text-white">
-      <Sidebar />
-      <div className="flex h-screen flex-1 flex-col justify-between">
-        <BrowserRouter>
+      <BrowserRouter basename={"/"}>
+        <Sidebar />
+        <div className="flex h-screen flex-1 flex-col justify-between">
           <Routes>
             <Route path="*" element={<NotFoundPage />} />
             <Route path="/" element={<HomePage />} />
@@ -23,9 +23,9 @@ function App() {
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/sensor01" element={<SensorSection />} />
           </Routes>
-        </BrowserRouter>
-        <Footer />
-      </div>
+          <Footer />
+        </div>
+      </BrowserRouter>
     </div>
   );
 }
