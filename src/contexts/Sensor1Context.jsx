@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 //Sensor API
 // const Sensor_API_URL = import.meta.env.VITE_SENSOR_01_API_URL;
-const Sensor_API_URL = "/" // 使用相對路徑
+const Sensor_API_URL = "/api/data"; // 使用相對路徑
 
 const defaultSensorContext = {
   number: null,
