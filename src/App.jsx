@@ -1,7 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Sidebar from "./components/SideBar.jsx";
+import Sidebar from "./components/Sidebar.jsx";
 import SensorSection from "./sensors/SensorSection.jsx";
 import AboutPage from "./pages/AboutPage.jsx";
 import HomePage from "./pages/HomePage.jsx";
