@@ -30,6 +30,7 @@ export function Sensor1Provider({ children }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        console.log("Actual API URL:", `${Sensor_API_URL}/data`);
         const response = await axios.get(`${Sensor_API_URL}/data`, {
           withCredentials: true,
         });
