@@ -10,11 +10,18 @@ import MyAvatar from "../assets/MyAvatar.jpg";
 
 const ContactPage = () => {
   const creatorName = "James";
-  const contactEmail = import.meta.env.VITE_CONTACT_EMAIL;
-  const githubLink = import.meta.env.VITE_CONTACT_GITHUB;
-  const mediumLink = import.meta.env.VITE_CONTACT_MEDIUM;
-  const linkedInLink = import.meta.env.VITE_CONTACT_LINKEDIN;
-  const instagramLink = import.meta.env.VITE_CONTACT_INSTAGRAM;
+  const contactEmail =
+    import.meta.env.VITE_CONTACT_EMAIL || process.env.VITE_CONTACT_EMAIL;
+  const githubLink =
+    import.meta.env.VITE_CONTACT_GITHUB || process.env.VITE_CONTACT_GITHUB;
+  const mediumLink =
+    import.meta.env.VITE_CONTACT_MEDIUM || process.env.VITE_CONTACT_MEDIUM;
+  const linkedInLink =
+    import.meta.env.VITE_CONTACT_LINKEDIN || process.env.VITE_CONTACT_LINKEDIN;
+  const instagramLink =
+    import.meta.env.VITE_CONTACT_INSTAGRAM ||
+    process.env.VITE_CONTACT_INSTAGRAM;
+
 
   const [showAvatar, setShowAvatar] = useState(true);
 

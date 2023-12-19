@@ -2,7 +2,7 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "${process.env.VITE_SENSOR_01_API_URL}/$1",
+      "dest": "http://192.168.0.115:80/api/$1",
       "methods": ["GET"]
     }
   ]
