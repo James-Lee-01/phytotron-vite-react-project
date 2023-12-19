@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 //Sensor API
 // const Sensor_API_URL = import.meta.env.VITE_SENSOR_01_API_URL;
-const Sensor_API_URL = "/api/data"; // 使用相對路徑
+const Sensor_API_URL = "/api"; // 使用相對路徑
 
 const defaultSensorContext = {
   number: null,
@@ -30,7 +30,7 @@ export function Sensor1Provider({ children }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(Sensor_API_URL, {
+        const response = await axios.get(`${Sensor_API_URL}/data`, {
           withCredentials: true,
         });
         console.log(response.data);

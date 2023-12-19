@@ -1,8 +1,8 @@
 {
   "routes": [
     {
-      "src": "/api/data",
-      "dest": "${VITE_SENSOR_01_API_URL}",
+      "src": "/api/(.*)",
+      "dest": "${VITE_SENSOR_01_API_URL}/$1",
       "methods": ["GET"]
     }
   ]
