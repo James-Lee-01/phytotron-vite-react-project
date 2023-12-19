@@ -8,6 +8,7 @@ import { FaEnvelope } from "react-icons/fa6";
 import { FaUserLarge } from "react-icons/fa6";
 import MyAvatar from "../assets/MyAvatar.jpg";
 
+// process.env是供Vercel部署使用
 const ContactPage = () => {
   const creatorName = "James";
   const contactEmail =
