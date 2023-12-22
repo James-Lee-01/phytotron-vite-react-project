@@ -27,6 +27,8 @@ const WeatherNow = () => {
     "MMM D, HH:mm",
   );
 
+  // Special conditions 
+  const weatherDataStatus = ["X", "x", -99];
 
   const fetchData = async () => {
     setLoading(true);
@@ -36,18 +38,29 @@ const WeatherNow = () => {
       const weatherForecastData = await weatherForecastAPI();
       // console.log("weatherNowData", weatherNowData);
       // console.log("weatherForecastData", weatherForecastData);
-      setCurrentWeather((prevWeather) => ({
-        ...prevWeather, //避免race情況
-        locationName: weatherNowData.locationName,
-        windSpeed: weatherNowData.windSpeed,
-        temperature: weatherNowData.temperature,
-        relativeHumidity: weatherNowData.relativeHumidity,
-        observationTime: weatherNowData.observationTime,
-        weatherCode: weatherForecastData.weatherCode,
-        weatherStatus: weatherForecastData.weatherStatus,
-        rainPossibility: weatherForecastData.rainPossibility,
-        comfortability: weatherForecastData.comfortability,
-      }));
+
+      const checkAndReplace = (value) => {
+        if (weatherDataStatus.includes(value)) {
+          return "維修中";
+        } else {
+          // Temperature values are rounded to the nearest integer
+          return value === weatherNowData.temperature
+            ? Math.round(value)
+            : value;
+        }
+      };
+
+      setCurrentWeather({
+        locationName: checkAndReplace(weatherNowData.locationName),
+        windSpeed: checkAndReplace(weatherNowData.windSpeed),
+        temperature: checkAndReplace(weatherNowData.temperature),
+        relativeHumidity: checkAndReplace(weatherNowData.relativeHumidity),
+        observationTime: checkAndReplace(weatherNowData.observationTime),
+        weatherCode: checkAndReplace(weatherForecastData.weatherCode),
+        weatherStatus: checkAndReplace(weatherForecastData.weatherStatus),
+        rainPossibility: checkAndReplace(weatherForecastData.rainPossibility),
+        comfortability: checkAndReplace(weatherForecastData.comfortability),
+      });
 
       setSuccess(true);
     } catch (error) {
@@ -90,7 +103,7 @@ const WeatherNow = () => {
         </h2>
         <div className="flex items-center justify-evenly">
           <div className="text-5xl">
-            {Math.round(currentWeather.temperature) || "--"} °C
+            {currentWeather.temperature || "--"} °C
           </div>
           <div className="text-8xl">
             <WeatherIcon
