@@ -1,77 +1,76 @@
 //Sensor01 Connect Context
-import axios from "axios";
+import Ably from "ably"
 import { createContext, useContext, useEffect, useState, } from "react";
 import PropTypes from "prop-types";
-
-//Sensor API
-// const Sensor_API_URL = import.meta.env.VITE_SENSOR_01_API_URL;
-const Sensor_API_URL = "/api"; // 使用相對路徑
 
 const defaultSensorContext = {
   number: null,
   temperature: "--",
   humidity: "--",
-  connect: "disconnect",
-}
+  connect: "searching", //data connection
+  isConnected: "disconnect", //server connection
+};
+
+const AblyChannel = "[?rewind=1]sensor01"; // 與 ESP8266 sensor01發布的 Channel 名稱相同
 
 const Sensor1Context = createContext(defaultSensorContext);
 // eslint-disable-next-line react-refresh/only-export-components
 export const useSensor1Context = () => useContext(Sensor1Context);
 
-//prop-types驗證
-Sensor1Provider.propTypes = {
-  children: PropTypes.node.isRequired,
-}
-
 export function Sensor1Provider({ children }) {
   const [data, setData] = useState(defaultSensorContext);
-  const [connect, setConnect] = useState("disconnect");
+  // 新增連線狀態
+  const [isConnected, setIsConnected] = useState("");
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        console.log("Actual API URL:", `${Sensor_API_URL}/data`);
-        const response = await axios.get(`${Sensor_API_URL}/data`, {
-          withCredentials: true,
-        });
-        console.log(response.data);
-        setData(response.data);
-        setConnect("connect");
-      } catch (error) {
-        if (error.response) {
-          // 伺服器回傳錯誤狀態碼
-          console.error("Server error:", error.response.status);
-          setConnect(`Server Error: ${error.response.status}`);
-          setData({ temperature: "--", humidity: "--" });
-        } else if (error.request) {
-          // 無法發送請求
-          console.error("Network error:", error.request);
-          setConnect("Network Error");
-          setData({ temperature: "--", humidity: "--" });
-        } else {
-          // 其他錯誤
-          console.error("Error fetching data", error.message);
-          setConnect("Fetch Error");
-          setData({ temperature: "--", humidity: "--" });
-        }
-      }
-    };
+    // Ably API 金鑰
+    const ably = new Ably.Realtime(import.meta.env.VITE_ABLY_KEY || process.env.VITE_ABLY_KEY);
 
-    //每3秒獲取一次資料
-    const interval = setInterval(fetchData, 3000);
-    return () => clearInterval(interval);
+    const ablyChannel = ably.channels.get(AblyChannel);
+
+    // 監聽連線狀態
+    ably.connection.on((stateChange) => {
+      setIsConnected(stateChange.current);
+    });
+
+    ablyChannel.subscribe((message) => {
+      const decoder = new TextDecoder("utf-8");
+      const decodedMessage = decoder.decode(message.data);
+
+      try {
+        const jsonData = JSON.parse(decodedMessage);
+        setData({
+          connect: jsonData.connect,
+          temperature: jsonData.temperature,
+          humidity: jsonData.humidity,
+        });
+      } catch (error) {
+        console.error("Error parsing JSON:", error);
+      }
+    });
+
+    return () => {
+      ablyChannel.unsubscribe();
+      ably.close();
+    };
   }, []);
-  
+
   return (
     <Sensor1Context.Provider
       value={{
         number: "01",
-        connect,
+        connect: data.connect,
         temperature: data.temperature,
         humidity: data.humidity,
+        isConnected,
       }}
     >
       {children}
     </Sensor1Context.Provider>
   );
+}
+
+//prop-types驗證
+Sensor1Provider.propTypes = {
+  children: PropTypes.node.isRequired,
 }
