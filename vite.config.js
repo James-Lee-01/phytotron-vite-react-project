@@ -15,7 +15,7 @@ const manifest = {
         urlPattern: ({url}) => {
           return url.pathname.startsWith("/")
         },
-        handler: "CacheFirst",
+        handler: "NetworkFirst",
         options: {
           cacheName: "enviroGuard-cache",
           cacheableResponse: {
