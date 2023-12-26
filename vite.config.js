@@ -37,7 +37,7 @@ const manifest = {
   "orientation": "portrait",
   "icons": [
     {
-      "src": "/EnviroGuard-icon.png",
+      "src": "/EnviroGuard-flat-icon.png",
       "sizes": "272x272",
       "type": "image/png"
     }
