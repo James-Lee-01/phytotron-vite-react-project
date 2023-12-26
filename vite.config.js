@@ -9,7 +9,7 @@ const manifest = {
     enabled: true
   },
   workbox: {
-    globPatterns: ["**/*{js,jsx,cdd,html,png,jpg}"],
+    globPatterns: ["**/*{js,jsx,css,html,png,jpg}"],
     runtimeCaching: [
       {
         urlPattern: ({url}) => {
@@ -29,12 +29,12 @@ const manifest = {
   "name": "EnviroGuard",
   "short_name": "EnviroGuard",
   "description": "EnviroGuard is a real-time weather and environmental monitoring app.",
-  "start_url": "/enviroguard.vercel.app/",
-  "scope": "/enviroguard.vercel.app/",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#fff",
+  "background_color": "#000",
   "theme_color": "#171717",
-  "Orientation": "portrait",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "/EnviroGuard-icon.png",
