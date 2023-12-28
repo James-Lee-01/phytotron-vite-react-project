@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Sidebar from "./components/Sidebar.jsx";
 import SensorSection from "./sensors/SensorSection.jsx";
+import SensorWenpo from "./sensors/SensorWenpo.jsx";
 import AboutPage from "./pages/AboutPage.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import ContactPage from "./pages/ContactPage.jsx";
@@ -22,6 +23,7 @@ function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/sensor01" element={<SensorSection />} />
+            <Route path="/sensor02" element={<SensorWenpo />} />
           </Routes>
           <Footer />
         </div>
