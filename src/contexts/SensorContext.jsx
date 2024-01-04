@@ -1,4 +1,4 @@
-//Sensor01 Connect Context
+//Sensor Connect Context
 import Ably from "ably"
 import { createContext, useContext, useEffect, useState, } from "react";
 import PropTypes from "prop-types";
@@ -11,22 +11,24 @@ const defaultSensorContext = {
   isConnected: "disconnect", //server connection
 };
 
-const AblyChannel = "[?rewind=1]sensor01"; // 與 ESP8266 sensor01發布的 Channel 名稱相同
+const AblyChannel = (sensorNumber) => `[?rewind=1]sensor${sensorNumber}`; // 與 ESP8266 sensor發布的 Channel 名稱相同
 
-const Sensor1Context = createContext(defaultSensorContext);
+const SensorContext = createContext(defaultSensorContext);
 // eslint-disable-next-line react-refresh/only-export-components
-export const useSensor1Context = () => useContext(Sensor1Context);
+export const useSensorContext = () => useContext(SensorContext);
 
-export function Sensor1Provider({ children }) {
+export function SensorProvider({ sensorNumber, sensorName, children }) {
   const [data, setData] = useState(defaultSensorContext);
   // 新增連線狀態
   const [isConnected, setIsConnected] = useState("");
 
   useEffect(() => {
     // Ably API 金鑰
-    const ably = new Ably.Realtime(import.meta.env.VITE_ABLY_KEY || process.env.VITE_ABLY_KEY);
+    const ably = new Ably.Realtime(
+      import.meta.env.VITE_ABLY_KEY || process.env.VITE_ABLY_KEY,
+    );
 
-    const ablyChannel = ably.channels.get(AblyChannel);
+    const ablyChannel = ably.channels.get(AblyChannel(sensorNumber));
 
     // 監聽連線狀態
     ably.connection.on((stateChange) => {
@@ -53,12 +55,13 @@ export function Sensor1Provider({ children }) {
       ablyChannel.unsubscribe();
       ably.close();
     };
-  }, []);
+  }, [sensorNumber]);
 
   return (
-    <Sensor1Context.Provider
+    <SensorContext.Provider
       value={{
-        number: "01",
+        number: sensorNumber,
+        name: sensorName,
         connect: data.connect,
         temperature: data.temperature,
         humidity: data.humidity,
@@ -66,11 +69,13 @@ export function Sensor1Provider({ children }) {
       }}
     >
       {children}
-    </Sensor1Context.Provider>
+    </SensorContext.Provider>
   );
 }
 
 //prop-types驗證
-Sensor1Provider.propTypes = {
+SensorProvider.propTypes = {
+  sensorNumber: PropTypes.string.isRequired,
+  sensorName: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
-}
+};

@@ -1,12 +1,12 @@
 // SensorInfo
-import { useSensor1Context } from "../contexts/Sensor1Context";
+import { useSensorContext } from "../contexts/SensorContext";
 import { useState } from "react";
 import { FaCircleInfo } from "react-icons/fa6";
 import { FaCircleXmark } from "react-icons/fa6";
 
 const SensorInfo = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { number, connect, isConnected } = useSensor1Context();
+  const { name, connect, isConnected } = useSensorContext();
   const serverColor =
     isConnected === "connected" ? "text-lime-600" : "text-rose-500";
   const statusColor =
@@ -34,7 +34,7 @@ const SensorInfo = () => {
 
       <div className="flex flex-wrap items-end text-lg">
         <p className="mr-2">No. :</p>
-        <p className="text-lime-600">{number}</p>
+        <p className="text-lime-600">{name}</p>
       </div>
       <div className="flex flex-wrap items-end text-lg">
         <p className="mr-2">Server :</p>

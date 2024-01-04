@@ -1,12 +1,12 @@
 
 // SensorBoard
-import { useSensor1Context } from "../contexts/Sensor1Context.jsx";
+import { useSensorContext } from "../contexts/SensorContext.jsx";
 import SensorCard from "./SensorCard.jsx";
 import { WiThermometer } from "react-icons/wi";
 import { WiHumidity } from "react-icons/wi";
 
 function SensorBoard() {
-  const { temperature, humidity } = useSensor1Context();
+  const { temperature, humidity } = useSensorContext();
   
   return (
     <div className="xs:my-6 my-2 flex flex-wrap items-center justify-center xs:gap-1">
