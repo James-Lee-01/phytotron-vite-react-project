@@ -92,7 +92,7 @@ const Sidebar = () => {
         <div>
           <div
             className={
-              "absolute flex w-full items-center justify-between bg-zinc-800 p-4 pt-0"
+              "absolute flex w-full items-center justify-between bg-zinc-800 p-4 pt-0 z-10"
             }
           >
             <div className="w-full">
