@@ -4,9 +4,9 @@ const AUTHORIZATION_KEY = import.meta.env.VITE_WEATHER_AUTHORIZATION_KEY
 const LOCATION_NAME = "臺北"
 const FORECAST_LOCATION = "臺北市"
 
-const now_URL = `https://opendata.cwb.gov.tw/api/v1/rest/datastore/O-A0003-001?Authorization=${AUTHORIZATION_KEY}&format=JSON&StationId=&StationName=${LOCATION_NAME}`
+const now_URL = `https://opendata.cwa.gov.tw/api/v1/rest/datastore/O-A0003-001?Authorization=${AUTHORIZATION_KEY}&format=JSON&StationId=&StationName=${LOCATION_NAME}`
 
-const forecast_URL = `https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=${AUTHORIZATION_KEY}&locationName=${FORECAST_LOCATION}`
+const forecast_URL = `https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=${AUTHORIZATION_KEY}&locationName=${FORECAST_LOCATION}`
 
 
 //Weather Now
