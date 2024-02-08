@@ -67,9 +67,9 @@ const WeatherIcon = ({weatherCode, refreshTime}) => {
   //根據回傳的觀測時間(小時)判斷是否為白天
   const isDaytime = (refreshTime) => {
     //時間格式是Dec 14, 15:20，需取得小時
-    //使用正規表達式取得':'前的小時
-    const match = refreshTime.match(/(\d+):/)
-    const hour = match ? parseInt(match[1], 10) : null
+    //使用正規表達式取得':'前的小時，且只取1到2位數字，提高效能避免正規表達式回溯攻擊(ReDoS)
+    const match = refreshTime.match(/(\d{1,2}):/);
+    const hour = match ? parseInt(match[1], 10) : null;
 
     // 假設白天是早上6點到晚上6點
     return hour >= 6 && hour < 18;
