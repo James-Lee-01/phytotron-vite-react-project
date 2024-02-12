@@ -26,7 +26,16 @@ const SensorInfo = () => {
       <h1 className="relative text-3xl font-bold">
         Sensor Info
         <span className="absolute top-1/2 ml-4 -translate-y-1/2 transform cursor-pointer text-xl">
-          <FaCircleInfo onClick={openModal} />
+          <FaCircleInfo
+            onClick={openModal}
+            onKeyDown={(e) => {
+              // 按下 Enter 鍵並執行相應的操作，輔助無滑鼠狀態。
+              if (e.key === "Enter") {
+                openModal();
+              }
+            }}
+            tabIndex="0" // 確保元素是可焦點的，使鍵盤事件生效
+          />
         </span>
       </h1>
 
@@ -50,20 +59,32 @@ const SensorInfo = () => {
           <div
             className="absolute h-full w-full bg-neutral-600 opacity-80"
             onClick={closeModal}
+            onKeyDown={(e) => {
+              // 按下 Enter 鍵並執行相應的操作，輔助無滑鼠狀態。
+              if (e.key === "Enter") {
+                closeModal();
+              }
+            }}
+            tabIndex="0" // 確保元素是可焦點的，使鍵盤事件生效
           ></div>
           <div className="relative z-10 rounded-md bg-neutral-900 p-4">
             <FaCircleXmark
               className="absolute -right-2 -top-2 cursor-pointer text-xl"
               onClick={closeModal}
+              onKeyDown={(e) => {
+                // 按下 Enter 鍵並執行相應的操作，輔助無滑鼠狀態。
+                if (e.key === "Enter") {
+                  closeModal();
+                }
+              }}
+              tabIndex="0" // 確保元素是可焦點的，使鍵盤事件生效
             />
-            <ul className="mx-4 list-inside list-disc space-y-2 xs:text-base text-sm">
+            <ul className="mx-4 list-inside list-disc space-y-2 text-sm xs:text-base">
               <h3 className="text-lg font-bold">關於本頁：</h3>
               <li>「No.」為感測器編號。</li>
               <li>「Server」為資料庫連線狀態。</li>
               <li>「Update」為感測器最新更新時間。</li>
-              <li>
-                氣象資料更新頻率 10分鐘一次，手動更新。
-              </li>
+              <li>氣象資料更新頻率 10分鐘一次，手動更新。</li>
               <li>感測器更新頻率 20秒一次，自動更新。</li>
               <li>感測器1分鐘以上未更新，請檢查其狀態。</li>
             </ul>
