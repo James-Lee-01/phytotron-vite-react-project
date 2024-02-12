@@ -1,9 +1,7 @@
 // WeatherNow component
 import dayjs from "dayjs";
 import { useState, useEffect } from "react";
-import { WiHumidity } from "react-icons/wi";
-import { WiStrongWind } from "react-icons/wi";
-import { WiUmbrella } from "react-icons/wi";
+import { WiHumidity, WiStrongWind, WiUmbrella } from "react-icons/wi";
 import { IoRefresh } from "react-icons/io5";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { weatherNowAPI, weatherForecastAPI } from "../api/weatherAPI";
@@ -36,8 +34,6 @@ const WeatherNow = () => {
     try {
       const weatherNowData = await weatherNowAPI();
       const weatherForecastData = await weatherForecastAPI();
-      // console.log("weatherNowData", weatherNowData);
-      // console.log("weatherForecastData", weatherForecastData);
 
       const checkAndReplace = (value) => {
         if (weatherDataStatus.includes(value)) {

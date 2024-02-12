@@ -1,5 +1,5 @@
-// SensorAPIContext 本程式碼供感測器使用API串接後端server時使用
-//亦可供區域網路內IoT使用
+// // SensorAPIContext 本程式碼供感測器使用API串接後端server時使用之範例程式碼
+// //亦可供區域網路內IoT使用
 
 // import axios from "axios";
 // import { createContext, useContext, useEffect, useState, } from "react";

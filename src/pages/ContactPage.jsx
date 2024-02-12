@@ -1,11 +1,13 @@
 //ContactPage
 import { useState } from "react";
-import { FaLinkedin } from "react-icons/fa6";
-import { FaGithub } from "react-icons/fa6";
-import { FaMedium } from "react-icons/fa6";
-import { FaInstagram } from "react-icons/fa6";
-import { FaEnvelope } from "react-icons/fa6";
-import { FaUserLarge } from "react-icons/fa6";
+import {
+  FaLinkedin,
+  FaGithub,
+  FaMedium,
+  FaInstagram,
+  FaEnvelope,
+  FaUserLarge
+} from "react-icons/fa6";
 import MyAvatar from "../assets/MyAvatar.jpg";
 
 // process.env是供Vercel部署使用

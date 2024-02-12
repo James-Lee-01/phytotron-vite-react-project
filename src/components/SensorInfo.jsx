@@ -1,8 +1,7 @@
 // SensorInfo
 import { useSensorContext } from "../contexts/SensorContext";
 import { useState } from "react";
-import { FaCircleInfo } from "react-icons/fa6";
-import { FaCircleXmark } from "react-icons/fa6";
+import { FaCircleInfo, FaCircleXmark } from "react-icons/fa6";
 
 const SensorInfo = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

@@ -2,8 +2,7 @@
 // SensorBoard
 import { useSensorContext } from "../contexts/SensorContext.jsx";
 import SensorCard from "./SensorCard.jsx";
-import { WiThermometer } from "react-icons/wi";
-import { WiHumidity } from "react-icons/wi";
+import { WiThermometer, WiHumidity } from "react-icons/wi";
 
 function SensorBoard() {
   const { temperature, humidity } = useSensorContext();
