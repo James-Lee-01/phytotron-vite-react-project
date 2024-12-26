@@ -52,7 +52,7 @@ export default defineConfig({
   base: '/',
   plugins: [react(), VitePWA(manifest)],
   server: {
-    port: 5001, // 這是 Vite 的端口
+    port: 5002, // 這是 Vite 的端口
     fs: {
       strict: true,
     },
