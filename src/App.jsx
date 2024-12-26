@@ -28,6 +28,10 @@ function App() {
               path="/sensor02"
               element={<SensorSection sensorNumber="02" sensorName="Phytotron" />}
             />
+            <Route
+              path="/sensor03"
+              element={<SensorSection sensorNumber="03" sensorName="HsinChu" />}
+            />
           </Routes>
           <Footer />
         </div>

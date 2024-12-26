@@ -22,6 +22,7 @@ const sensorDropdown = {
   items: [
     { name: "Sensor 01", link: "/sensor01" },
     { name: "Phytotron", link: "/sensor02" },
+    { name: "Sensor 03", link: "/sensor03" },
   ],
 };
 
